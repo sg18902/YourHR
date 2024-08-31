@@ -263,6 +263,12 @@ app.get('/download_resume/:userid', async (req, res) => {
   }
 });
 
+// Simple hello everyone API
+app.get('/', (req, res) => {
+  res.send('Hello everyone!');
+});
+
+
 // Define a port
 const PORT = process.env.PORT || 5000;
 
