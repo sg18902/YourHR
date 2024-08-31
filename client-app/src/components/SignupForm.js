@@ -64,7 +64,7 @@ const SignupForm = ({ open, onClose }) => {
     formData.append('password', hashedPassword);
 
     try {
-      const response = await axios.post('http://localhost:5000/signup', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

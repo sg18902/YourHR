@@ -26,7 +26,7 @@ const JobDetailsDialog = ({ open, job, onClose, userId }) => {
   // Function to handle job application
   const handleApply = async () => {
     try {
-      await axios.post('http://localhost:5000/apply', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/apply`, {
         jobId: job._id,  // Use the job's ID
         userId: userid,  // Use the user ID passed as prop
       });

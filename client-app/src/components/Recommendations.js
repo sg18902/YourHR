@@ -48,7 +48,7 @@ const Recommendations = () => {
         try {
             console.log(userid)
             // Send a request to download the resume
-            const response = await axios.get(`http://localhost:5000/download_resume/${userid}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/download_resume/${userid}`, {
                 responseType: 'blob', // Important: this tells axios to handle the response as a Blob
             });
     
@@ -71,7 +71,7 @@ const Recommendations = () => {
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/skills`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/skills`);
                 setSkillOptions(response.data);
                 setSelectedSkills(JSON.parse(localStorage.getItem('skills')) || []);
             } catch (error) {
@@ -86,7 +86,7 @@ const Recommendations = () => {
         setLoadingState(true); // Start loading state
         try {
             console.log(userid)
-            const response = await axios.get(`http://localhost:5000/applied_jobs/${userid}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/applied_jobs/${userid}`);
             setAppliedJobs(response.data);
         } catch (error) {
             console.error('Error fetching Applied Jobs:', error);
