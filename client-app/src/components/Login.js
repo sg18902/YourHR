@@ -10,6 +10,8 @@ import {
   Box,
   IconButton,
   InputAdornment,
+  CircularProgress,
+  Backdrop,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
@@ -25,14 +27,15 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log('API call triggered');
+    setLoading(true);
 
     try {
-      const response = await axios.post( `${process.env.REACT_APP_API_URL}/login`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
         email,
         password,
       });
@@ -51,6 +54,8 @@ const Login = () => {
       }
     } catch (err) {
       alert('Login unsuccessful');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -199,6 +204,17 @@ const Login = () => {
       </Container>
 
       <SignupForm open={showSignUp} onClose={() => setShowSignUp(false)} />
+
+      <Backdrop
+        open={loading}
+        sx={{
+          color: '#fff',
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };
