@@ -149,8 +149,6 @@ app.post('/recommendations', async (req, res) => {
   }
 });
 
-
-
 app.get('/skills', async (req, res) => {
   try {
     // Use aggregation to get distinct skills
@@ -262,10 +260,13 @@ app.get('/download_resume/:userid', async (req, res) => {
       return res.status(404).send('Resume not found.');
     }
 
+    // Get the file extension based on MIME type
+    const extension = user.resume.contentType.split('/')[1];
+
     // Set the content type and disposition for file download
     res.set({
       'Content-Type': user.resume.contentType,
-      'Content-Disposition': `attachment; filename="${user.name}-resume.pdf"`,  // Assuming the file is a PDF
+      'Content-Disposition': `attachment; filename="${user.name}-resume.${extension}"`,
     });
 
     // Send the resume file
@@ -275,6 +276,7 @@ app.get('/download_resume/:userid', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 
 // Simple hello everyone API
 app.get('/', (req, res) => {

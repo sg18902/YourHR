@@ -46,20 +46,15 @@ const Recommendations = () => {
         console.log('Downloading...');
     
         try {
-            console.log(userid)
+            console.log(userid);
+    
             // Send a request to download the resume
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/download_resume/${userid}`, {
                 responseType: 'blob', // Important: this tells axios to handle the response as a Blob
             });
     
-            // Get the content type and file name from the response headers
-            const contentType = response.headers['content-type'];
-            const fileName = response.headers['content-disposition']
-                ? response.headers['content-disposition'].split('filename=')[1]
-                : 'resume.pdf';  // Fallback to a default file name if not provided
-    
-            // Use file-saver to save the file
-            saveAs(new Blob([response.data], { type: contentType }), fileName);
+            // Use file-saver to save the file without setting a specific name
+            saveAs(new Blob([response.data], { type: response.headers['content-type'] }));
     
             console.log('Download complete.');
         } catch (error) {
@@ -67,6 +62,7 @@ const Recommendations = () => {
             alert('Failed to download the resume.');
         }
     };
+    
 
     useEffect(() => {
         const fetchSkills = async () => {
