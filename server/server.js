@@ -43,8 +43,21 @@ const extractSkills = (text) => {
     remove_duplicates: true,
   });
 
+  const lowercaseKeywords = keywords.map(keyword => keyword.toLowerCase());
+
   // Customize this list of keywords based on common IT skills
-  const itSkills = ['javascript', 'python', 'java', 'node', 'react', 'angular', 'docker', 'aws', 'sql', 'mongodb'];
+const itSkills = [
+  'javascript', 'python', 'java', 'node', 'react', 'angular', 'docker', 'aws', 'sql', 'mongodb',
+  'html', 'css', 'typescript', 'c#', 'c++', 'ruby', 'php', 'swift', 'kotlin', 'go',
+  'django', 'flask', 'spring', 'laravel', 'express', 'vue', 'svelte', 'next.js', 'nuxt.js', 'graphql',
+  'kubernetes', 'terraform', 'ansible', 'jenkins', 'git', 'github', 'bitbucket', 'gitlab', 'jira', 'confluence',
+  'azure', 'gcp', 'oracle', 'linux', 'unix', 'bash', 'powershell', 'shell scripting', 'puppet', 'chef',
+  'hadoop', 'spark', 'hive', 'kafka', 'elasticsearch', 'redis', 'rabbitmq', 'nginx', 'apache', 'tomcat',
+  'ci/cd', 'devops', 'microservices', 'serverless', 'graphql', 'restful apis', 'soap', 'json', 'xml', 'jwt',
+  'oauth', 'sso', 'authentication', 'authorization', 'pen testing', 'vulnerability scanning', 'firewalls', 'ids/ips', 'siem', 'endpoint security',
+  'data analysis', 'data visualization', 'tableau', 'power bi', 'matplotlib', 'pandas', 'numpy', 'tensorflow', 'keras', 'pytorch',
+  'machine learning', 'deep learning', 'nlp', 'computer vision', 'cloud computing', 'blockchain', 'iot', 'vr/ar', 'mobile development', 'agile methodologies'
+];
   const skills = keywords.filter(keyword => itSkills.includes(keyword));
 
   return skills;

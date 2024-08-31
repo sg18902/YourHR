@@ -104,7 +104,7 @@ const Recommendations = () => {
     const fetchJobs = async () => {
         setLoadingState(true); // Start loading state
         try {
-            const response = await axios.post(`http://localhost:5000/recommendations`, { skills: selectedSkills, experience: parseInt(experience), userid });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/recommendations`, { skills: selectedSkills, experience: parseInt(experience), userid });
             setJobs(response.data);
         } catch (error) {
             console.error('Error fetching job recommendations:', error);
